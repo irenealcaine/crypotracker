@@ -2,6 +2,7 @@ import { Typography } from '@mui/material';
 import { Container } from '@mui/system';
 import React from 'react'
 import { makeStyles } from 'tss-react/mui';
+import Carousel from './Carousel';
 
 
 const useStyles = makeStyles()(() => {
@@ -14,10 +15,14 @@ const useStyles = makeStyles()(() => {
       display: 'flex',
       flexDirection: 'column',
       paddingTop: 25,
-      justifyContent: 'space-arround'
+      justifyContent: 'space-around'
     },
     tagLine: {
-
+      display: 'flex',
+      height: '40%',
+      flexDirection: 'column',
+      justifyContent: 'center',
+      textAlign: 'center'
     }
   };
 })
@@ -48,6 +53,7 @@ const Banner = () => {
             Consigue la información de todas tus criptomonedas favoritas
           </Typography>
         </div>
+        <Carousel />
       </Container>
     </div>
   )
