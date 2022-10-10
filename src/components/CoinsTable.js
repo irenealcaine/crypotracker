@@ -60,7 +60,6 @@ const CoinsTable = () => {
 
   const { classes } = useStyles();
   const navigate = useNavigate()
-  console.log(coins)
 
   return (
 
@@ -160,6 +159,7 @@ const CoinsTable = () => {
             setPage(value)
             window.scroll(0, 450)
           }}
+          variant="outlined"
         />
       </Container>
     </ThemeProvider>

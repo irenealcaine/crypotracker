@@ -95,7 +95,7 @@ const Carousel = () => {
         autoPlay
         items={items}
       />
-      {console.log(items)}
+
     </div>
   )
 }

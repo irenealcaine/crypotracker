@@ -22,7 +22,7 @@ const CoinPage = () => {
     fetchCoin()
   }, [])
 
-  console.log(coin)
+  // console.log(coin)
 
   const useStyles = makeStyles()((theme) => {
     return {
@@ -31,7 +31,7 @@ const CoinPage = () => {
         [theme.breakpoints.down('md')]: {
           flexDirection: 'column',
           alignItems: 'center'
-        }
+        },
       },
       sidebar: {
         width: '30%',
@@ -42,12 +42,12 @@ const CoinPage = () => {
         flexDirection: 'column',
         alignItems: 'center',
         marginTop: 25,
-        borderRight: '2px solid grey'
+        borderRight: '2px solid grey',
       },
       heading: {
         fontWeight: 'bold',
         marginBottom: 20,
-        fontFamily: 'Montserrat'
+        fontFamily: 'Montserrat',
       },
       marketData: {
         alignSelf: 'start',
@@ -56,11 +56,11 @@ const CoinPage = () => {
         width: '100%',
         [theme.breakpoints.down('md')]: {
           display: 'flex',
-          justifyContent: 'space-around'
+          justifyContent: 'space-around',
         },
         [theme.breakpoints.down('sm')]: {
           flexDirection: 'column',
-          alignItems: 'start'
+          alignItems: 'start',
         },
       }
     };
@@ -72,11 +72,13 @@ const CoinPage = () => {
 
   return (
     <div className={classes.container}>
+
       <div className={classes.sidebar}>
         <img src={coin?.image.large} alt={coin?.name} height='200' style={{ marginBottom: 20 }} />
         <Typography variant='h3' className={classes.heading}>
           {coin?.name}
         </Typography>
+
         <div className={classes.marketData}>
           <span style={{ display: 'flex' }}>
             <Typography variant='h5' className={classes.heading}>Rango: </Typography>
@@ -96,8 +98,11 @@ const CoinPage = () => {
             <Typography variant='h5' style={{ fontFamily: 'Montserrat' }}>{coin?.market_data.market_cap[currency.toLowerCase()].toString().slice(0, -6)} M {symbol}</Typography>
           </span>
         </div>
+
       </div>
+
       <CoinInfo coin={coin} />
+
     </div>
   )
 }
