@@ -58,57 +58,58 @@ const CoinInfo = ({ coin }) => {
 
   return (
     <ThemeProvider theme={darkTheme}>
-      <div className={classes.container}></div>
-      {
-        !historicData ? (
-          <CircularProgress
-            style={{ color: 'gold' }}
-            size={250}
-            thickness={1}
-          />
-        ) : (
-          <>
-            <Line
-              data={{
-                labels: historicData.map((coin) => {
-                  let date = new Date(coin[0]);
-                  let time = `${date.getHours()}:${date.getMinutes()}`;
-                  return days === 1 ? time : date.toLocaleDateString();
-                }),
-                datasets: [{
-                  data: historicData.map((coin) => coin[1]),
-                  label: `Precio en los últimos ${days} días en ${currency}`,
-                  borderColor: '#eebc1d'
-                }]
-              }}
-              options={{
-                elements: {
-                  point: {
-                    radius: 1
-                  }
-                }
-              }}
-            // style={{
-            //   width: '70%'
-            // }}
+      <div className={classes.container}>
+        {
+          !historicData ? (
+            <CircularProgress
+              style={{ color: 'gold' }}
+              size={250}
+              thickness={1}
             />
-            <div style={{
-              display: 'flex',
-              marginTop: 20,
-              justifyContent: 'space-around',
-              width: '100%'
-            }}>
-              {chartDays.map(day => (
-                <SelectButton
-                  key={day.value}
-                  onClick={() => setDays(day.value)}
-                  selected={day.value === days}
-                >{day.label}</SelectButton>
-              ))}
-            </div>
-          </>
-        )
-      }
+          ) : (
+            <>
+              <Line
+                data={{
+                  labels: historicData.map((coin) => {
+                    let date = new Date(coin[0]);
+                    let time = `${date.getHours()}:${date.getMinutes()}`;
+                    return days === 1 ? time : date.toLocaleDateString();
+                  }),
+                  datasets: [{
+                    data: historicData.map((coin) => coin[1]),
+                    label: `Precio en los últimos ${days} días en ${currency}`,
+                    borderColor: '#eebc1d'
+                  }]
+                }}
+                options={{
+                  elements: {
+                    point: {
+                      radius: 1
+                    }
+                  }
+                }}
+              // style={{
+              //   width: '70%'
+              // }}
+              />
+              <div style={{
+                display: 'flex',
+                marginTop: 20,
+                justifyContent: 'space-around',
+                width: '100%'
+              }}>
+                {chartDays.map(day => (
+                  <SelectButton
+                    key={day.value}
+                    onClick={() => setDays(day.value)}
+                    selected={day.value === days}
+                  >{day.label}</SelectButton>
+                ))}
+              </div>
+            </>
+          )
+        }
+      </div>
     </ThemeProvider>
   )
 }
