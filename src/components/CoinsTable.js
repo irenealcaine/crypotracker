@@ -3,7 +3,7 @@ import React, { useEffect } from 'react'
 import { useState } from 'react'
 import { CoinList } from '../config/api'
 import { CryptoState } from '../CryptoContext'
-import { CircularProgress, createTheme, LinearProgress, Pagination, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TextField, ThemeProvider, Typography } from '@mui/material'
+import { CircularProgress, createTheme, Pagination, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TextField, ThemeProvider, Typography } from '@mui/material'
 import { Container } from '@mui/system'
 // import { Navigate } from 'react-router-dom'
 import { makeStyles } from 'tss-react/mui'
@@ -71,7 +71,7 @@ const CoinsTable = () => {
           Criptomonedas
         </Typography>
         <TextField
-          label='Busca una criptomoneda...'
+          label='Buscar...'
           varaint='outlined'
           style={{ marginBottom: 20, width: '100%' }}
           onChange={(e) => setSearch(e.target.value)}
