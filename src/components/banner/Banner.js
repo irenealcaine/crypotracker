@@ -11,7 +11,7 @@ const useStyles = makeStyles()(() => {
       backgroundImage: 'url(./banner.jpg)'
     },
     bannerContent: {
-      height: 400,
+      height: 420,
       display: 'flex',
       flexDirection: 'column',
       paddingTop: 25,
@@ -22,7 +22,8 @@ const useStyles = makeStyles()(() => {
       height: '40%',
       flexDirection: 'column',
       justifyContent: 'center',
-      textAlign: 'center'
+      textAlign: 'center',
+      alignItems: 'center'
     }
   };
 })
@@ -40,17 +41,22 @@ const Banner = () => {
             style={{
               fontWeight: 'bold',
               marginBottom: 15,
-              fontFamily: 'Montserrat'
+              fontFamily: 'Raleway'
             }}>
-            CryptoTracker
+            Crypto Tracker
           </Typography>
           <Typography
             variant='subtitle2'
             style={{
               color: 'darkgrey',
-              fontFamily: 'Montserrat'
+              fontFamily: 'Raleway',
+              backgroundColor: '#18181baa',
+              borderRadius: 10,
+              padding: 10,
+              border: '2px solid #06b6d4',
+              width: '80%'
             }}>
-            Consigue la información de todas tus criptomonedas favoritas
+            Consigue la información de tus criptomonedas favoritas
           </Typography>
         </div>
         <Carousel />

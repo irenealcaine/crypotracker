@@ -19,7 +19,8 @@ const useStyles = makeStyles()(() => {
       alignItems: 'center',
       cursor: 'pointer',
       textTransform: 'uppercase',
-      color: 'white'
+      color: 'white',
+
     }
   };
 })
@@ -60,7 +61,7 @@ const Carousel = () => {
           &nbsp;
           <span
             style={{
-              color: profit > 0 ? 'green' : 'red',
+              color: profit > 0 ? '#65a30d' : '#dc2626',
               fontWeight: 500
             }}>
             {profit && '+'}{coin.price_change_percentage_24h.toFixed(2)}%

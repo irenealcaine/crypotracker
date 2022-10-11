@@ -3,7 +3,7 @@ import React, { useEffect } from 'react'
 import { useState } from 'react'
 import { CoinList } from '../config/api'
 import { CryptoState } from '../CryptoContext'
-import { createTheme, LinearProgress, Pagination, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TextField, ThemeProvider, Typography } from '@mui/material'
+import { CircularProgress, createTheme, LinearProgress, Pagination, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TextField, ThemeProvider, Typography } from '@mui/material'
 import { Container } from '@mui/system'
 // import { Navigate } from 'react-router-dom'
 import { makeStyles } from 'tss-react/mui'
@@ -31,6 +31,9 @@ const CoinsTable = () => {
   const darkTheme = createTheme({
     palette: {
       mode: 'dark',
+      primary: {
+        main: '#06b6d4',
+      },
     },
   });
 
@@ -43,18 +46,13 @@ const CoinsTable = () => {
   const useStyles = makeStyles()(() => {
     return {
       row: {
-        backgroundColor: '#16171a',
+        backgroundImage: '#06b6d407',
         cursor: 'pointer',
         '&:hover': {
           backgroundColor: '#131111'
         },
-        fontFamily: 'Montserrat'
+        fontFamily: 'Raleway'
       },
-      pagination: {
-        '& .MuiPaginationItem-root': {
-          color: 'gold'
-        }
-      }
     };
   })
 
@@ -65,12 +63,12 @@ const CoinsTable = () => {
 
 
     <ThemeProvider theme={darkTheme}>
-      <Container style={{ textAlign: 'center' }}>
+      <Container style={{ textAlign: 'center', backgroundImage: 'linear-gradient(150deg, transparent 15%, #06b6d422 50%, transparent 85%)' }}>
         <Typography
           variant='h4'
-          style={{ margin: 18, fontFamily: 'Montserrat' }}
+          style={{ margin: 18, fontFamily: 'Raleway' }}
         >
-          Precios
+          Criptomonedas
         </Typography>
         <TextField
           label='Busca una criptomoneda...'
@@ -81,17 +79,21 @@ const CoinsTable = () => {
         <TableContainer>
           {
             loading ? (
-              <LinearProgress style={{ backgroundColor: 'gold' }} />
+              <CircularProgress
+                style={{ color: '#06b6d4' }}
+                size={250}
+                thickness={1}
+              />
             ) : (
               <Table>
-                <TableHead style={{ backgroundColor: 'gold' }}>
+                <TableHead style={{ backgroundColor: '#06b6d4' }}>
                   <TableRow>
                     {['Moneda', 'Precio', 'Cambio en 24h', 'Market cap'].map((head) => (
                       <TableCell
                         style={{
                           color: 'black',
                           fontWeight: '700',
-                          fontFamily: 'Montserrat'
+                          fontFamily: 'Raleway'
                         }}
                         key={head}
                         align={head === 'Moneda' ? '' : 'right'}
@@ -111,8 +113,9 @@ const CoinsTable = () => {
                           onClick={() => navigate(`/coins/${row.id}`)}
                           className={classes.row}
                           key={row.name}
+                          style={{ border: '1px solid transparent' }}
                         >
-                          <TableCell component='th' scope='row' style={{ display: 'flex', gap: 15 }}>
+                          <TableCell component='th' scope='row' style={{ display: 'flex', gap: 15, border: '1px solid transparent' }}>
                             <img src={row.image} alt={row.name} height='50' style={{ marginBottom: 10 }} />
                             <div style={{ display: 'flex', flexDirection: 'column' }}>
                               <span style={{ textTransform: 'uppercase', fontSize: 22 }}>
@@ -125,18 +128,20 @@ const CoinsTable = () => {
                           </TableCell>
                           <TableCell
                             align='right'
+                            style={{ border: '1px solid transparent' }}
                           >
                             {row.current_price.toFixed(2)}{symbol}
                           </TableCell>
                           <TableCell
                             align='right'
-                            style={{ color: profit > 0 ? 'green' : 'red', fontWeight: '500' }}
+                            style={{ color: profit > 0 ? '#65a30d' : '#dc2626', fontWeight: '500', border: '1px solid transparent' }}
                           >
                             {profit && '+'}
                             {row.price_change_percentage_24h.toFixed(2)}%
                           </TableCell>
                           <TableCell
                             align='right'
+                            style={{ border: '1px solid transparent' }}
                           >
                             {row.market_cap.toString().slice(0, -6)}M
                           </TableCell>
@@ -150,6 +155,7 @@ const CoinsTable = () => {
         </TableContainer>
 
         <Pagination
+          color='primary'
           style={{
             padding: 20, width: '100%', display: 'flex', justifyContent: 'center'
           }}
@@ -159,10 +165,10 @@ const CoinsTable = () => {
             setPage(value)
             window.scroll(0, 450)
           }}
-          variant="outlined"
+
         />
       </Container>
-    </ThemeProvider>
+    </ThemeProvider >
   )
 }
 

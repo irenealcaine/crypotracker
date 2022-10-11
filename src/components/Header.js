@@ -8,8 +8,8 @@ const useStyles = makeStyles()(() => {
   return {
     title: {
       flex: 1,
-      color: 'gold',
-      fontFamily: 'Montserrat',
+      color: '#06b6d4',
+      fontFamily: 'Raleway',
       fontWeight: 'bold',
       cursor: 'pointer'
     },

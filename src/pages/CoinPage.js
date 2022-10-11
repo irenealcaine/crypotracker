@@ -5,7 +5,7 @@ import { SingleCoin } from '../config/api'
 import { CryptoState } from '../CryptoContext';
 import { makeStyles } from 'tss-react/mui';
 import CoinInfo from '../components/CoinInfo';
-import { LinearProgress, Typography } from '@mui/material';
+import { CircularProgress, LinearProgress, Typography } from '@mui/material';
 
 const CoinPage = () => {
   const { id } = useParams()
@@ -32,6 +32,7 @@ const CoinPage = () => {
           flexDirection: 'column',
           alignItems: 'center'
         },
+        background: 'linear-gradient(150deg, transparent 15%, #06b6d422 50%, transparent 85%)'
       },
       sidebar: {
         width: '30%',
@@ -46,8 +47,7 @@ const CoinPage = () => {
       },
       heading: {
         fontWeight: 'bold',
-        marginBottom: 20,
-        fontFamily: 'Montserrat',
+        fontFamily: 'Raleway',
       },
       marketData: {
         alignSelf: 'start',
@@ -68,7 +68,13 @@ const CoinPage = () => {
 
   const { classes } = useStyles();
 
-  if (!coin) return <LinearProgress style={{ backgroundColor: 'gold' }} />
+  if (!coin) return <CircularProgress
+    style={{ color: '#06b6d4' }}
+    size={250}
+    thickness={1}
+  />
+
+  const profit = coin?.market_data.price_change_percentage_24h > 0
 
   return (
     <div className={classes.container}>
@@ -80,25 +86,39 @@ const CoinPage = () => {
         </Typography>
 
         <div className={classes.marketData}>
-          <span style={{ display: 'flex' }}>
+          <span style={{ display: 'flex', flexWrap: 'wrap' }}>
             <Typography variant='h5' className={classes.heading}>Rango: </Typography>
             &nbsp; &nbsp;
-            <Typography variant='h5' style={{ fontFamily: 'Montserrat' }}>{coin?.market_cap_rank} </Typography>
+            <Typography variant='h5' style={{ fontFamily: 'Raleway' }}>{coin?.market_cap_rank} </Typography>
           </span>
 
-          <span style={{ display: 'flex' }}>
+          <span style={{ display: 'flex', flexWrap: 'wrap' }}>
             <Typography variant='h5' className={classes.heading}>Precio: </Typography>
             &nbsp; &nbsp;
-            <Typography variant='h5' style={{ fontFamily: 'Montserrat' }}>{coin?.market_data.current_price[currency.toLowerCase()]} {symbol} </Typography>
+            <Typography variant='h5' style={{ fontFamily: 'Raleway' }}>
+              {coin?.market_data.current_price[currency.toLowerCase()]} {symbol}
+            </Typography>
+            &nbsp; &nbsp;
+
+            <Typography variant='h6' style={{ fontFamily: 'Raleway', color: profit ? '#65a30d' : '#dc2626' }}>
+              ({profit ? '+' : ''}{coin?.market_data.price_change_percentage_24h.toFixed(2)}%)
+            </Typography>
           </span>
 
-          <span style={{ display: 'flex' }}>
+          <span style={{ display: 'flex', flexWrap: 'wrap' }}>
             <Typography variant='h5' className={classes.heading}>Market cap: </Typography>
             &nbsp; &nbsp;
-            <Typography variant='h5' style={{ fontFamily: 'Montserrat' }}>{coin?.market_data.market_cap[currency.toLowerCase()].toString().slice(0, -6)} M {symbol}</Typography>
+            <Typography variant='h5' style={{ fontFamily: 'Raleway' }}>{coin?.market_data.market_cap[currency.toLowerCase()].toString().slice(0, -6)} M {symbol}</Typography>
           </span>
-        </div>
 
+          <span style={{ display: 'flex', flexWrap: 'wrap' }}>
+            <Typography variant='h5' className={classes.heading}>Web: </Typography>
+            &nbsp; &nbsp;
+            <Typography variant='h5' style={{ fontFamily: 'Raleway' }}><a href={coin?.links.homepage[0]} target='_blank' rel="noreferrer"> {coin?.name}</a></Typography>
+          </span>
+
+        </div>
+        {console.log(coin)}
       </div>
 
       <CoinInfo coin={coin} />
