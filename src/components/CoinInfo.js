@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { CircularProgress, createTheme, ThemeProvider } from '@mui/material'
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
@@ -24,6 +25,7 @@ const CoinInfo = ({ coin }) => {
 
   useEffect(() => {
     fetchHistoricData()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [days])
 
   const darkTheme = createTheme({

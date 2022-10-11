@@ -5,7 +5,7 @@ import { SingleCoin } from '../config/api'
 import { CryptoState } from '../CryptoContext';
 import { makeStyles } from 'tss-react/mui';
 import CoinInfo from '../components/CoinInfo';
-import { CircularProgress, LinearProgress, Typography } from '@mui/material';
+import { CircularProgress, Typography } from '@mui/material';
 
 const CoinPage = () => {
   const { id } = useParams()
@@ -20,6 +20,7 @@ const CoinPage = () => {
 
   useEffect(() => {
     fetchCoin()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   // console.log(coin)
