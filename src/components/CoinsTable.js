@@ -4,7 +4,7 @@ import React, { useEffect } from 'react'
 import { useState } from 'react'
 import { CoinList } from '../config/api'
 import { CryptoState } from '../CryptoContext'
-import { CircularProgress, createTheme, Pagination, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TextField, ThemeProvider, Typography } from '@mui/material'
+import { Card, CardActionArea, CardContent, CardMedia, CircularProgress, createTheme, Pagination, TextField, ThemeProvider, Typography } from '@mui/material'
 import { Container } from '@mui/system'
 // import { Navigate } from 'react-router-dom'
 import { makeStyles } from 'tss-react/mui'
@@ -43,6 +43,7 @@ const CoinsTable = () => {
       coin.name.toLowerCase().includes(search) || coin.symbol.toLowerCase().includes(search)
     ))
   }
+  console.log(coins)
 
   const useStyles = makeStyles()(() => {
     return {
@@ -77,7 +78,66 @@ const CoinsTable = () => {
           style={{ marginBottom: 20, width: '100%' }}
           onChange={(e) => setSearch(e.target.value)}
         />
-        <TableContainer>
+
+
+        {
+          loading ? (
+            <CircularProgress
+              style={{ color: '#06b6d4' }}
+              size={250}
+              thickness={1}
+            />
+          ) : (
+            <Container style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '1rem' }}>
+              {handleSearch().slice((page - 1) * 12, (page - 1) * 12 + 12).map((crypto) => {
+                const profit = crypto.price_change_percentage_24h > 0
+                return (
+                  <Card
+                    onClick={() => navigate(`/coins/${crypto.id}`)}
+                    variant="outlined"
+                    style={{ width: '250px', backgroundColor: 'transparent', gap: '0.5rem' }}
+                  >
+                    <CardActionArea>
+                      <CardContent style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                        <Typography
+                          variant='caption'
+                          style={{ color: crypto.market_cap_rank === 1 ? 'gold' : crypto.market_cap_rank === 2 ? 'darkgrey' : crypto.market_cap_rank === 3 ? 'orange' : 'white', alignSelf: 'end', marginTop: '-0.5rem' }}
+                        >
+                          Rango: {crypto.market_cap_rank}
+                        </Typography>
+                        <CardMedia
+                          component="img"
+                          alt={crypto.name}
+                          image={crypto.image}
+                          style={{ maxWidth: '80px', height: '80px' }}
+                        />
+                        <Typography>
+                          {crypto.name}
+                        </Typography>
+                        <Typography
+                          variant='h5'
+                        >
+                          {crypto.current_price.toFixed(2)} {symbol}
+                        </Typography>
+
+                        <span style={{ color: profit > 0 ? '#65a30d' : '#dc2626', fontWeight: '500' }}>
+                          ({profit && '+'}{crypto.price_change_percentage_24h.toFixed(2)}%)
+                        </span>
+                        <Typography
+                          variant='body2'>
+                          Market cap: {crypto.market_cap.toString().slice(0, -6)} M {symbol}
+                        </Typography>
+                      </CardContent>
+                    </CardActionArea>
+                  </Card>
+                )
+              })}
+            </Container>
+          )
+        }
+
+
+        {/* <TableContainer>
           {
             loading ? (
               <CircularProgress
@@ -153,7 +213,7 @@ const CoinsTable = () => {
               </Table>
             )
           }
-        </TableContainer>
+        </TableContainer> */}
 
         <Pagination
           color='primary'
@@ -161,7 +221,7 @@ const CoinsTable = () => {
             padding: 20, width: '100%', display: 'flex', justifyContent: 'center'
           }}
           classes={{ ul: classes.pagination }}
-          count={(handleSearch().length / 10).toFixed(0)}
+          count={(handleSearch().length / 12).toFixed(0)}
           onChange={(_, value) => {
             setPage(value)
             window.scroll(0, 450)
