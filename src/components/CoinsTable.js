@@ -101,7 +101,7 @@ const CoinsTable = () => {
                       <CardContent style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                         <Typography
                           variant='caption'
-                          style={{ color: crypto.market_cap_rank === 1 ? 'gold' : crypto.market_cap_rank === 2 ? 'darkgrey' : crypto.market_cap_rank === 3 ? 'orange' : 'white', alignSelf: 'end', marginTop: '-0.5rem' }}
+                          style={{ color: crypto.market_cap_rank === 1 ? 'gold' : crypto.market_cap_rank === 2 ? 'darkgrey' : crypto.market_cap_rank === 3 ? 'orange' : 'white', alignSelf: 'end', marginTop: '-0.5rem', fontFamily: 'Raleway' }}
                         >
                           Rango: {crypto.market_cap_rank}
                         </Typography>
@@ -111,11 +111,15 @@ const CoinsTable = () => {
                           image={crypto.image}
                           style={{ maxWidth: '80px', height: '80px' }}
                         />
-                        <Typography>
+                        <Typography
+                          variant='h5'
+                          style={{ fontFamily: 'Raleway' }}
+                        >
                           {crypto.name}
                         </Typography>
                         <Typography
-                          variant='h5'
+                          variant='h4'
+                          style={{ marginTop: '0.5rem', fontFamily: 'Raleway', fontWeight: 'bold' }}
                         >
                           {crypto.current_price.toFixed(2)} {symbol}
                         </Typography>
@@ -124,7 +128,9 @@ const CoinsTable = () => {
                           ({profit && '+'}{crypto.price_change_percentage_24h.toFixed(2)}%)
                         </span>
                         <Typography
-                          variant='body2'>
+                          variant='body2'
+                          style={{ marginTop: '0.7rem', fontFamily: 'Raleway' }}
+                        >
                           Market cap: {crypto.market_cap.toString().slice(0, -6)} M {symbol}
                         </Typography>
                       </CardContent>

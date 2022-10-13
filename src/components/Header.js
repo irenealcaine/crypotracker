@@ -36,7 +36,7 @@ const Header = () => {
         <Container>
           <Toolbar>
             <Typography onClick={() => navigate('/')} className={classes.title} variant='h5'>
-              CryptoTracker
+              Crypto Tracker
             </Typography>
             <Select variant='outlined' style={{ width: 100, height: 40, marginRight: 15 }} value={currency} onChange={(e) => setCurrency(e.target.value)}>
               <MenuItem value={'EUR'}>EUR</MenuItem>
