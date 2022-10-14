@@ -5,7 +5,8 @@ import { SingleCoin } from '../config/api'
 import { CryptoState } from '../CryptoContext';
 import { makeStyles } from 'tss-react/mui';
 import CoinInfo from '../components/CoinInfo';
-import { CircularProgress, Typography } from '@mui/material';
+import { CircularProgress, Typography, Container } from '@mui/material';
+import parse from 'html-react-parser';
 
 const CoinPage = () => {
   const { id } = useParams()
@@ -68,6 +69,30 @@ const CoinPage = () => {
           flexDirection: 'column',
           alignItems: 'start',
         },
+      },
+      footer: {
+        display: 'flex',
+        [theme.breakpoints.down('sm')]: {
+          flexDirection: 'column-reverse',
+          alignItems: 'center',
+        },
+      },
+      footer1: {
+        width: '70%',
+        paddingRight: 40,
+        paddingTop: 0,
+        [theme.breakpoints.down('md')]: {
+          width: '100%',
+          paddingRight: 0,
+          paddingTop: 20
+        },
+        textAlign: 'justify'
+      },
+      footer2: {
+        width: '30%',
+        [theme.breakpoints.down('md')]: {
+          width: '100%'
+        },
       }
     };
   })
@@ -92,26 +117,29 @@ const CoinPage = () => {
         <Typography variant='h3' style={{ fontFamily: 'Raleway', fontWeight: 'bold' }}>
           {coin?.market_data.current_price[currency.toLowerCase()]} {symbol}
         </Typography>
-
-        {console.log(coin)}
+        {/* {console.log(coin)} */}
       </div>
 
       <CoinInfo coin={coin} />
 
-      <div>
-        <span style={{ display: 'flex', flexWrap: 'wrap' }}>
-          <Typography variant='h5' className={classes.heading}>Market cap: </Typography>
-          &nbsp; &nbsp;
-          <Typography variant='h5' style={{ fontFamily: 'Raleway' }}>{coin?.market_data.market_cap[currency.toLowerCase()].toString().slice(0, -6)} M {symbol}</Typography>
-        </span>
+      <Container className={classes.footer}>
+        <Typography style={{}} className={classes.footer1}>
+          {parse(coin.description.en)}
+        </Typography>
+        <div style={{}} className={classes.footer2}>
+          <span style={{ display: 'flex', flexWrap: 'wrap' }}>
+            <Typography variant='h5' className={classes.heading}>Market cap: </Typography>
+            &nbsp; &nbsp;
+            <Typography variant='h5' style={{ fontFamily: 'Raleway' }}>{coin?.market_data.market_cap[currency.toLowerCase()].toString().slice(0, -6)} M {symbol}</Typography>
+          </span>
 
-        <span style={{ display: 'flex', flexWrap: 'wrap' }}>
-          <Typography variant='h5' className={classes.heading}>Web: </Typography>
-          &nbsp; &nbsp;
-          <Typography variant='h5' style={{ fontFamily: 'Raleway' }}><a href={coin?.links.homepage[0]} target='_blank' rel="noreferrer"> {coin?.name}</a></Typography>
-        </span>
-      </div>
-
+          <span style={{ display: 'flex', flexWrap: 'wrap' }}>
+            <Typography variant='h5' className={classes.heading}>Web: </Typography>
+            &nbsp; &nbsp;
+            <Typography variant='h5' style={{ fontFamily: 'Raleway' }}><a href={coin?.links.homepage[0]} target='_blank' rel="noreferrer"> {coin?.name}</a></Typography>
+          </span>
+        </div>
+      </Container>
     </div>
   )
 }

@@ -1,18 +1,18 @@
 export const chartDays = [
   {
-    label: "1 día",
+    label: "1d",
     value: 1,
   },
   {
-    label: "30 días",
+    label: "30d",
     value: 30,
   },
   {
-    label: "2 meses",
+    label: "2m",
     value: 60,
   },
   {
-    label: "1 año",
+    label: "1a",
     value: 365,
   },
 ];

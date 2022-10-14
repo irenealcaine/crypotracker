@@ -43,7 +43,6 @@ const CoinsTable = () => {
       coin.name.toLowerCase().includes(search) || coin.symbol.toLowerCase().includes(search)
     ))
   }
-  console.log(coins)
 
   const useStyles = makeStyles()(() => {
     return {
@@ -93,6 +92,7 @@ const CoinsTable = () => {
                 const profit = crypto.price_change_percentage_24h > 0
                 return (
                   <Card
+                    key={crypto.id}
                     onClick={() => navigate(`/coins/${crypto.id}`)}
                     variant="outlined"
                     style={{ width: '250px', backgroundColor: 'transparent', gap: '0.5rem' }}

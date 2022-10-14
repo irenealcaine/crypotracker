@@ -9,6 +9,7 @@ import { CryptoState } from '../CryptoContext'
 import Chart from 'chart.js/auto';
 import { chartDays } from '../config/data'
 import SelectButton from './SelectButton'
+import { Container } from '@mui/system'
 
 const CoinInfo = ({ coin }) => {
   const [historicData, setHistoricData] = useState()
@@ -69,64 +70,70 @@ const CoinInfo = ({ coin }) => {
 
   return (
     <ThemeProvider theme={darkTheme}>
-      <div className={classes.container}>
-        {
-          !historicData ? (
-            <CircularProgress
-              style={{ color: '#06b6d4' }}
-              size={250}
-              thickness={1}
-            />
-          ) : (
-            <>
-
-
-
-              <div style={{
-                display: 'flex',
-                justifyContent: 'space-around',
-                width: '100%',
-                marginTop: 10
-              }}>
-                {chartDays.map(day => (
-                  <SelectButton
-                    key={day.value}
-                    onClick={() => setDays(day.value)}
-                    selected={day.value === days}
-                  >{day.label}</SelectButton>
-                ))}
-              </div>
-
-              <Typography variant='h4' style={{ fontFamily: 'Raleway', margin: 10, borderBottom: '2px solid', color: percentage > 0 ? '#65a30d' : '#dc2626' }}>
-                {percentage > 0 ? '+' : ''}{percentage.toFixed(2)}%
-              </Typography>
-
-              <Line
-                data={{
-                  labels: historicData.map((coin) => {
-                    let date = new Date(coin[0]);
-                    let time = `${date.getHours()}:${date.getMinutes()}`;
-                    return days === 1 ? time : date.toLocaleDateString();
-                  }),
-                  datasets: [{
-                    data: historicData.map((coin) => coin[1]),
-                    label: `Precio en los últimos ${days} días en ${currency}`,
-                    borderColor: '#06b6d4'
-                  }]
-                }}
-                options={{
-                  elements: {
-                    point: {
-                      radius: 1
-                    }
-                  }
-                }}
+      <Container>
+        <div className={classes.container}>
+          {
+            !historicData ? (
+              <CircularProgress
+                style={{ color: '#06b6d4' }}
+                size={250}
+                thickness={1}
               />
+            ) : (
+              <>
 
-            </>
-          )
-        }
-      </div >
+
+
+                <div style={{
+                  display: 'flex',
+                  justifyContent: 'space-around',
+                  width: '100%',
+                  marginTop: 10
+                }}>
+                  {chartDays.map(day => (
+                    <SelectButton
+                      key={day.value}
+                      onClick={() => setDays(day.value)}
+                      selected={day.value === days}
+                    >{day.label}</SelectButton>
+                  ))}
+                </div>
+
+                <Typography variant='h4' style={{ fontFamily: 'Raleway', margin: 10, borderBottom: '2px solid', color: percentage > 0 ? '#65a30d' : '#dc2626' }}>
+                  {percentage > 0 ? '+' : ''}{percentage.toFixed(2)}%
+                </Typography>
+
+                <Line
+                  data={{
+                    labels: historicData.map((coin) => {
+                      let date = new Date(coin[0]);
+                      let time = `${date.getHours()}:${date.getMinutes()}`;
+                      return days === 1 ? time : date.toLocaleDateString();
+                    }),
+                    datasets: [{
+                      data: historicData.map((coin) => coin[1]),
+                      label: `Precio en los últimos ${days} días en ${currency}`,
+                      borderColor: '#06b6d4'
+                    }]
+                  }}
+                  options={{
+                    elements: {
+                      point: {
+                        radius: 0
+                      },
+                      line: {
+                        tension: 0.2,
+                        borderWidth: 1
+                      }
+                    }
+                  }}
+                />
+
+              </>
+            )
+          }
+        </div >
+      </Container>
     </ThemeProvider >
   )
 }
