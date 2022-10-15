@@ -58,7 +58,11 @@ const CoinInfo = ({ coin }) => {
   let percentage = ''
   if (days === 1) {
     percentage = coin?.market_data.price_change_percentage_24h
-  } else if (days === 30 || days === '30') {
+  } else if (days === 7) {
+    percentage = coin?.market_data.price_change_percentage_7d
+  } else if (days === 14) {
+    percentage = coin?.market_data.price_change_percentage_14d
+  } else if (days === 30) {
     percentage = coin?.market_data.price_change_percentage_30d
   } else if (days === 60) {
     percentage = coin?.market_data.price_change_percentage_60d
@@ -66,7 +70,6 @@ const CoinInfo = ({ coin }) => {
     percentage = coin?.market_data.price_change_percentage_1y
   }
 
-  console.log(percentage, days, coin?.price_change_percentage_30d)
 
   return (
     <ThemeProvider theme={darkTheme}>
@@ -86,7 +89,8 @@ const CoinInfo = ({ coin }) => {
 
                 <div style={{
                   display: 'flex',
-                  justifyContent: 'space-around',
+                  justifyContent: 'center',
+                  flexWrap: 'wrap',
                   width: '100%',
                   marginTop: 10
                 }}>
@@ -95,6 +99,8 @@ const CoinInfo = ({ coin }) => {
                       key={day.value}
                       onClick={() => setDays(day.value)}
                       selected={day.value === days}
+                      className={classes.buttons}
+                      size="small"
                     >{day.label}</SelectButton>
                   ))}
                 </div>
@@ -107,7 +113,7 @@ const CoinInfo = ({ coin }) => {
                   data={{
                     labels: historicData.map((coin) => {
                       let date = new Date(coin[0]);
-                      let time = `${date.getHours()}:${date.getMinutes()}`;
+                      let time = `${date.getHours() < 10 ? '0' + date.getHours() : date.getHours()}:${date.getMinutes() < 10 ? '0' + date.getMinutes() : date.getMinutes()}`;
                       return days === 1 ? time : date.toLocaleDateString();
                     }),
                     datasets: [{

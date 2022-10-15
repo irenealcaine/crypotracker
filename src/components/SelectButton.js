@@ -4,15 +4,14 @@ import { makeStyles } from 'tss-react/mui'
 
 const SelectButton = ({ children, selected, onClick }) => {
 
-  const useStyles = makeStyles()(() => {
+  const useStyles = makeStyles()((theme) => {
     return {
       selectbutton: {
         border: "1px solid #06b6d4",
         borderRadius: 5,
         padding: 10,
-        paddingLeft: 20,
-        paddingRight: 20,
         fontFamily: "Raleway",
+        textAlign: 'center',
         cursor: "pointer",
         backgroundColor: selected ? "#06b6d4" : "",
         color: selected ? "black" : "",
@@ -21,8 +20,12 @@ const SelectButton = ({ children, selected, onClick }) => {
           backgroundColor: "#06b6d4",
           color: "black",
         },
-        width: "22%",
-        margin: 5
+        width: "14%",
+        margin: 5,
+        [theme.breakpoints.down('md')]: {
+          margin: 2,
+          padding: 5
+        }
       }
     };
   })
