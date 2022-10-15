@@ -118,7 +118,6 @@ const CoinInfo = ({ coin }) => {
                     }),
                     datasets: [{
                       data: historicData.map((coin) => coin[1]),
-                      label: `Precio en los últimos ${days} días en ${currency}`,
                       borderColor: '#06b6d4'
                     }]
                   }}
@@ -130,6 +129,11 @@ const CoinInfo = ({ coin }) => {
                       line: {
                         tension: 0.2,
                         borderWidth: 1
+                      },
+                    },
+                    plugins: {
+                      legend: {
+                        display: false
                       }
                     }
                   }}
