@@ -134,6 +134,16 @@ const CoinInfo = ({ coin }) => {
                     plugins: {
                       legend: {
                         display: false
+                      },
+                      datalabels: {
+                        color: '#FFCE56'
+                      }
+                    },
+                    scales: {
+                      y: {
+                        ticks: {
+                          mirror: true
+                        }
                       }
                     }
                   }}
